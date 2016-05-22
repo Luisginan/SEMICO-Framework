@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SEMICO_Framework", "cc\SEMICO_Framework.vbproj", "{B24AA9B8-C727-466D-A243-A0714F44E3C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpTest", "CsharpTest\CsharpTest.csproj", "{8A42FC62-823B-4DFA-B8FF-3002C3E1CD6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5A3F39E2-1B94-4F86-91A7-DC43BEFCB703}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://semico.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = cc\\SEMICO_Framework.vbproj
+		SccProjectName1 = cc
+		SccLocalPath1 = cc
+		SccProjectUniqueName2 = CsharpTest\\CsharpTest.csproj
+		SccProjectName2 = CsharpTest
+		SccLocalPath2 = CsharpTest
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B24AA9B8-C727-466D-A243-A0714F44E3C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24AA9B8-C727-466D-A243-A0714F44E3C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24AA9B8-C727-466D-A243-A0714F44E3C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24AA9B8-C727-466D-A243-A0714F44E3C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A42FC62-823B-4DFA-B8FF-3002C3E1CD6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A42FC62-823B-4DFA-B8FF-3002C3E1CD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A42FC62-823B-4DFA-B8FF-3002C3E1CD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A42FC62-823B-4DFA-B8FF-3002C3E1CD6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
