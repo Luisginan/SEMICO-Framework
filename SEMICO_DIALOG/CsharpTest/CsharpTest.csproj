@@ -74,7 +74,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cc\SEMICO_Framework.vbproj">
+    <ProjectReference Include="..\SEMICO_FRAMEWORK\SEMICO_Framework.vbproj">
       <Project>{b24aa9b8-c727-466d-a243-a0714f44e3c5}</Project>
       <Name>SEMICO_Framework</Name>
     </ProjectReference>

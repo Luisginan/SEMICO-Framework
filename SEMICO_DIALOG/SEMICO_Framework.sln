@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SEMICO_Framework", "cc\SEMICO_Framework.vbproj", "{B24AA9B8-C727-466D-A243-A0714F44E3C5}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SEMICO_Framework", "SEMICO_FRAMEWORK\SEMICO_Framework.vbproj", "{B24AA9B8-C727-466D-A243-A0714F44E3C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpTest", "CsharpTest\CsharpTest.csproj", "{8A42FC62-823B-4DFA-B8FF-3002C3E1CD6A}"
 EndProject
@@ -20,9 +20,9 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://semico.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = cc\\SEMICO_Framework.vbproj
-		SccProjectName1 = cc
-		SccLocalPath1 = cc
+		SccProjectUniqueName1 = SEMICO_FRAMEWORK\\SEMICO_Framework.vbproj
+		SccProjectName1 = SEMICO_FRAMEWORK
+		SccLocalPath1 = SEMICO_FRAMEWORK
 		SccProjectUniqueName2 = CsharpTest\\CsharpTest.csproj
 		SccProjectName2 = CsharpTest
 		SccLocalPath2 = CsharpTest
