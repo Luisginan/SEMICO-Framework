@@ -1,5 +1,5 @@
 ﻿Imports Semico.ClsMessageDialog
-Imports Semico.ClsQB
+Imports Semico.ClsQBBase
 
 
 Public Class DialogChangePassword

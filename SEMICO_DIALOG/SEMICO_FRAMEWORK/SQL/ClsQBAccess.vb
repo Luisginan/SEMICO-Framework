@@ -1,6 +1,7 @@
 
 Public Class ClsQBAccess
-    Inherits ClsQB
+    Inherits ClsQBBase
+
 #Region "SQLF ..."
 
     ''' <summary>

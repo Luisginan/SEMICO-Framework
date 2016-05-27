@@ -104,6 +104,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SharedFunction\Validation\WinForm\ClsValidationWinform.vb" />
+    <Compile Include="Interface\IClsQB.vb" />
+    <Compile Include="Interface\IClsQBBase.vb" />
+    <Compile Include="SQL\DBComponent.vb" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -113,7 +116,7 @@
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />
     <Compile Include="SharedFunction\ClsCurensi.vb" />
-    <Compile Include="SQL\ClsQB.vb" />
+    <Compile Include="SQL\ClsQBBase.vb" />
     <Compile Include="SQL\ClsQBSql.vb" />
     <Compile Include="SQL\ClsQBAccess.vb" />
     <Compile Include="Enum\EnumTipeBackupRestore.vb" />

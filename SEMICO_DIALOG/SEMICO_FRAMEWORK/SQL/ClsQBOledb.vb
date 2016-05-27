@@ -1,21 +1,25 @@
+Imports System.Data.Common
 Imports System.Data.OleDb
-Imports Semico.ClsQB
+Imports Semico.ClsQBBase
 Imports Semico.ClsQuickCode
 
 Public Class ClsQBOledb
+    Inherits ClsQBBase
     Implements IDisposable
+    Implements IClsQB
 
 #Region "Fields..."
-    Private cmd As New OleDbCommand
+    Private cmd As IDbCommand
     Private irows As Int64 = 0
     Private dt As New DataTable
     Private rowsAffected As Integer
-    Private connection As New OleDbConnection
+    Private connection As IDbConnection
+    Private dataAdapter As IDbDataAdapter
 #End Region
 
 #Region "property .. ."
 
-    Public Property TimeOut() As Integer
+    Public Property TimeOut() As Integer Implements IClsQB.TimeOut
         Get
             Return cmd.CommandTimeout
         End Get
@@ -23,7 +27,7 @@ Public Class ClsQBOledb
             cmd.CommandTimeout = value
         End Set
     End Property
-    Public ReadOnly Property HasRows() As Boolean
+    Public ReadOnly Property HasRows() As Boolean Implements IClsQB.HasRows
         Get
             Dim temp As Boolean = False
             If RowCount > 0 Then
@@ -34,68 +38,68 @@ Public Class ClsQBOledb
             Return temp
         End Get
     End Property
-    Default ReadOnly Property Item(ByVal idx As Integer) As Object
+    Default Public ReadOnly Property Item(ByVal idx As Integer) As Object Implements IClsQB.Item
         Get
             Return ND(Table.Rows(irows).Item(idx))
         End Get
     End Property
-    Default ReadOnly Property Item(ByVal FieldName As String) As Object
+    Default Public ReadOnly Property Item(ByVal FieldName As String) As Object Implements IClsQB.Item
         Get
             Return Table.Rows(irows).Item(FieldName)
         End Get
     End Property
-    Public ReadOnly Property Collumn() As DataRow
+    Public ReadOnly Property Collumn() As DataRow Implements IClsQB.Collumn
         Get
             Return Table.Rows(irows)
         End Get
     End Property
-    Public ReadOnly Property RowCount() As Integer
+    Public ReadOnly Property RowCount() As Integer Implements IClsQB.RowCount
         Get
             Return Table.Rows.Count
         End Get
     End Property
-    Public ReadOnly Property Table() As DataTable
+    Public ReadOnly Property Table() As DataTable Implements IClsQB.Table
         Get
             Return dt
         End Get
     End Property
-    Public Property StringQuery() As String
-    Public Property Transaction() As Boolean
-    Public Property ConnectionString() As String
-    Public ReadOnly Property RowsEffected() As Integer
+    Public Property StringQuery() As String Implements IClsQB.StringQuery
+    Public Property Transaction() As Boolean Implements IClsQB.Transaction
+
+    Public ReadOnly Property RowsEffected() As Integer Implements IClsQB.RowsEffected
         Get
             Return rowsAffected
         End Get
     End Property
 #End Region
 
-#Region "Navigasi ..."
+#Region "Navigation ..."
 
-    Sub NextRow()
+    Public Sub NextRow() Implements IClsQB.NextRow
         If irows = RowCount - 1 Then Exit Sub
         irows += 1
     End Sub
 
-    Sub PrevRow()
+    Public Sub PrevRow() Implements IClsQB.PrevRow
         If irows = 0 Then Exit Sub
         irows -= 1
     End Sub
 
-    Sub MoveLastRow()
+    Public Sub MoveLastRow() Implements IClsQB.MoveLastRow
         irows = Table.Rows.Count - 1
     End Sub
 
-    Sub MoveFirstRow()
+    Public Sub MoveFirstRow() Implements IClsQB.MoveFirstRow
         irows = 0
     End Sub
 
 #End Region
 
 #Region "Function.."
-    Public Sub TestConnection()
+    Public Sub TestConnection() Implements IClsQB.TestConnection
         ValidasiConn()
     End Sub
-    Public Function AutoNumberIfLastKey(ByVal Field As String, ByVal Tabel As String) As String
+    Public Function AutoNumberIfLastKey(ByVal Field As String, ByVal Tabel As String) As String Implements IClsQB.AutoNumberIfLastKey
         Dim temp As String
         StringQuery = QSelect(Field, Tabel)
         Execute()
@@ -118,11 +122,8 @@ Public Class ClsQBOledb
         Return temp
     End Function
 
-    ''' <summary>
-    ''' Mendapatkan Auto Number untuk Kode Unik
-    ''' </summary>
-    ''' <returns>Kode Key Unik</returns>
-    Public Function AutoNumber(ByVal Field As String, ByVal Tabel As String) As String
+
+    Public Function AutoNumber(ByVal Field As String, ByVal Tabel As String) As String Implements IClsQB.AutoNumber
         Dim temp As String
         StringQuery = QSelect(Field, Tabel)
         Execute()
@@ -156,16 +157,15 @@ Public Class ClsQBOledb
     Sub New()
 
     End Sub
-    Sub New(ByVal User As String, ByVal pass As String, ByVal server As String, ByVal DBname As String)
-        ConnectionString = String.Format("Provider=SQLOLEDB.1;Password={0};Persist Security Info=True;User ID={1};Initial Catalog={2};Data Source={3}", pass, User, DBname, server)
-    End Sub
 
-    Sub New(ByVal KoneksiStringnya As String, Optional ByVal xTimeout As Integer = 0)
-        ConnectionString = KoneksiStringnya
+    Sub New(dbComponent As DBComponent, Optional ByVal xTimeout As Integer = 0)
+        cmd = dbComponent.dbCommand
+        connection = dbComponent.dbConnection
+        dataAdapter = dbComponent.dbAdapter
         If xTimeout > 0 Then TimeOut = xTimeout
     End Sub
 
-    Public Function MultipleQuery(ByVal Querynya As ArrayList) As Integer
+    Public Function MultipleQuery(ByVal Querynya As List(Of String)) As Integer Implements IClsQB.MultipleQuery
         Dim i As Byte = 0
         Dim rc As Integer = 0
         Dim batas As Byte
@@ -188,18 +188,7 @@ Public Class ClsQBOledb
         Return rc
     End Function
 
-    Public Function Execute(ByVal StrKoneksi As String, ByVal strQuery As String) As DataTable
-        ConnectionString = StrKoneksi
-        If strQuery.ToUpper Like "SELECT*" Or strQuery.ToUpper Like "*EXEC*" Then
-            dt = ViewDataManual(strQuery)
-        Else
-            ManualQuery(strQuery)
-        End If
-        dt = dt
-        Return dt
-    End Function
-
-    Public Function Execute(Optional ByVal Query As String = "") As DataTable
+    Public Function Execute(Optional ByVal Query As String = "") As DataTable Implements IClsQB.Execute
         If Query = "" Then Query = StringQuery
         If Query = "" Then Throw New ArgumentException("Query not Set")
         If Query.ToUpper Like "SELECT*" Or Query.ToUpper Like "*EXEC*" Then
@@ -213,10 +202,9 @@ Public Class ClsQBOledb
 #End Region
 
 #Region "Transaction ..."
-    Sub BeginsTrans()
-        If ConnectionString <> "" Then
-            connection.ConnectionString = ConnectionString
-        End If
+
+    Public Sub BeginsTrans() Implements IClsQB.BeginsTrans
+
         If connection.State = ConnectionState.Open Then connection.Close()
         connection.Open()
         cmd.Connection = connection
@@ -224,14 +212,14 @@ Public Class ClsQBOledb
         _Transaction = True
     End Sub
 
-    Sub CommitTrans()
+    Public Sub CommitTrans() Implements IClsQB.CommitTrans
         _Transaction = False
         cmd.Transaction.Commit()
         connection.Close()
         cmd.Dispose()
     End Sub
 
-    Sub RollBackTrans()
+    Public Sub RollBackTrans() Implements IClsQB.RollBackTrans
         _Transaction = False
         cmd.Transaction.Rollback()
         connection.Close()
@@ -274,12 +262,7 @@ Public Class ClsQBOledb
         Dispose()
     End Sub
 
-    ''' <summary>
-    ''' Execute Query For Insert, Delete UPdate not for select
-    ''' </summary>
-    ''' <param name="Query">SQL Query</param>
-    ''' <returns>Rows Affected by execute Query</returns>
-    ''' <remarks></remarks>
+
     Private Function ManualQuery(ByVal Query As String) As Integer
         Dim temp As Integer = 0
         ValidasiConn()
@@ -298,29 +281,23 @@ Public Class ClsQBOledb
         If connection.State = ConnectionState.Open Then
             connection.Close()
         End If
-        If ConnectionString <> "" Then
-            Try
-                connection.ConnectionString = ConnectionString
-            Catch ex As Exception
-                connection.ConnectionString = "Provider=SQLOLEDB;" & ConnectionString
-            End Try
-        End If
+
         connection.Open()
     End Sub
 
     Private Function ViewDataManual(ByVal Query As String) As DataTable
         Dim _temp As New DataTable
-        Dim _oda As New OleDbDataAdapter
         _temp.TableName = "DT1"
         ValidasiConn()
         _StringQuery = Query
         cmd.CommandText = Query
         cmd.Connection = connection
-        _oda.SelectCommand = cmd
-        _oda.Fill(_temp)
+        dataAdapter.SelectCommand = cmd
+        Dim dataSet As New DataSet()
+        dataAdapter.Fill(dataSet)
         Dispose()
         irows = 0
-        Return _temp
+        Return dataSet.Tables(0)
     End Function
 
 #End Region
