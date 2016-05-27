@@ -1,7 +1,7 @@
 Imports System.Reflection
 Imports System.Linq
 Imports System.Math
-Imports Semico.ClsQB_SQL
+Imports Semico.ClsQBSql
 
 Public Class ClsQuickCode
 

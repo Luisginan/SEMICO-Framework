@@ -1,5 +1,5 @@
 
-Public Class ClsQB_SQL
+Public Class ClsQBSql
 #Region "SQLF ..."
     Inherits ClsQB
     ''' <summary>

@@ -1,5 +1,5 @@
 Imports Semico.ClsMessageDialog
-Imports Semico.ClsQB_SQL
+Imports Semico.ClsQBSql
 
 Public Class DialogFindData
     Implements Dialog
@@ -8,7 +8,7 @@ Public Class DialogFindData
     Private _StrSQL As String = ""
     Private _Strfields As String = ""
     Private _IntItem As Integer
-    Private _SMC As ClsSqlOledb
+    Private _SMC As ClsQBOledb
     Private _cancel As Boolean
 
     Private Property rowsCount As Double
@@ -351,7 +351,7 @@ Public Class DialogFindData
             SetStrQuery()
         End If
         SetupOptionControlSearch()
-        _SMC = New ClsSqlOledb(StringConection)
+        _SMC = New ClsQBOledb(StringConection)
         LoadSources()
     End Sub
 

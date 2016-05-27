@@ -8,7 +8,7 @@
     <ProjectGuid>{B24AA9B8-C727-466D-A243-A0714F44E3C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Semico</RootNamespace>
-    <AssemblyName>Semico</AssemblyName>
+    <AssemblyName>SEMICO</AssemblyName>
     <MyType>Windows</MyType>
     <StartupObject>
     </StartupObject>
@@ -48,7 +48,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Semico.xml</DocumentationFile>
+    <DocumentationFile>SEMICO.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
     <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
@@ -64,7 +64,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>Semico.xml</DocumentationFile>
+    <DocumentationFile>SEMICO.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
     <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -114,8 +114,8 @@
     <Import Include="System.Windows.Forms" />
     <Compile Include="SharedFunction\ClsCurensi.vb" />
     <Compile Include="SQL\ClsQB.vb" />
-    <Compile Include="SQL\ClsQB_SQL.vb" />
-    <Compile Include="SQL\ClsQB_Access.vb" />
+    <Compile Include="SQL\ClsQBSql.vb" />
+    <Compile Include="SQL\ClsQBAccess.vb" />
     <Compile Include="Enum\EnumTipeBackupRestore.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +124,7 @@
     </Compile>
     <Compile Include="SharedFunction\Operation\ClsFile.vb" />
     <Compile Include="SharedFunction\Notification\ClsMessageDialog.vb" />
-    <Compile Include="SQL\ClsSqlOledb.vb" />
+    <Compile Include="SQL\ClsQBOledb.vb" />
     <Compile Include="SharedFunction\Validation\Data\ClsValidationText.vb" />
     <Compile Include="Enum\EnumModeButton.vb" />
     <Compile Include="Enum\EnumTipeMessage.vb" />

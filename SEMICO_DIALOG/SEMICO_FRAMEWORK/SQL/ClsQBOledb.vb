@@ -2,7 +2,7 @@ Imports System.Data.OleDb
 Imports Semico.ClsQB
 Imports Semico.ClsQuickCode
 
-Public Class ClsSqlOledb
+Public Class ClsQBOledb
     Implements IDisposable
 
 #Region "Fields..."

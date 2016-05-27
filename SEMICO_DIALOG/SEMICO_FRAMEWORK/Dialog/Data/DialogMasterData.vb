@@ -1,11 +1,11 @@
-﻿Imports Semico.ClsQB_SQL
+﻿Imports Semico.ClsQBSql
 Imports Semico.ClsMessageDialog
 
 Public Class DialogMasterData
     Public Property Title As String
     Public Property ConnectionString As String
     Private Table As SEMICO_Table
-    Private conn As New ClsSqlOledb
+    Private conn As New ClsQBOledb
     Private QueryString As String = ""
     Public Property TotalField As String = ""
     Public Property InputForm As Object
@@ -35,7 +35,7 @@ Public Class DialogMasterData
     Sub New(_ConnectionString As String, _Table As SEMICO_Table, Optional filter As String = "")
         InitializeComponent()
         ConnectionString = _ConnectionString
-        conn = New ClsSqlOledb(ConnectionString)
+        conn = New ClsQBOledb(ConnectionString)
         Table = _Table
         BuildQueryString()
         QueryString += filter

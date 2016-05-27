@@ -60,7 +60,7 @@ Public Class DialogChangePassword
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
-        Dim conn As New ClsSqlOledb(StringConnection)
+        Dim conn As New ClsQBOledb(StringConnection)
         If txtNewPassword.Text = txtRypePassword.Text And txtOldPassword.Text = Password Then
             If AskMessage("Password will be change for Permanent?") = Windows.Forms.DialogResult.Yes Then
                 conn.Execute(String.Format("Update {0} set [{1}]= {2} where [{3}]={4}", TABLE, FIELD_PASSWORD, CSQL(txtNewPassword.Text), FIELD_USERID, CSQL(USERID)))

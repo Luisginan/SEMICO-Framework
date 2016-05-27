@@ -120,7 +120,7 @@ Public Class DialogLogin
         _ValuePassword = txtPassword.Text
     End Sub
     Function GetStatusLogin(ByVal TextUser As String, ByVal TextPassword As String) As Boolean
-        Dim conn As New ClsSqlOledb(_StrKoneksi)
+        Dim conn As New ClsQBOledb(_StrKoneksi)
         Dim BoStatusLogin As Boolean = False
         Dim sql As String = String.Format("select * from {0} where [{1}]={2} {3}", _StrTabel, _StrFieldUser, CSQL(TextUser), CRITERIA)
         If conn.Execute(sql).Rows.Count = 0 Then

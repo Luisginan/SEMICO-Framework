@@ -1,7 +1,7 @@
 ﻿Imports Semico.ClsQuickCode
 Imports Semico
 Public Class DialogFinder
-    Dim SMC As New ClsSqlOledb
+    Dim SMC As New ClsQBOledb
 #Region "Property"
     Public ReadOnly Property HasValue As Boolean
         Get
